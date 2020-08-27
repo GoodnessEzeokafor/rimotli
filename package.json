@@ -13,14 +13,25 @@
     "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore ."
   },
   "dependencies": {
+    "@hscmap/vue-menu": "^2.10.0",
+    "@luxdamore/vue-cursor-fx": "^1.4.0",
     "@nuxt/http": "latest",
-    "nuxt": "latest"
+    "@xunlei/vue-context-menu": "^1.0.2",
+    "gsap": "^3.5.1",
+    "jwt-decode": "^2.2.0",
+    "nuxt": "latest",
+    "nuxt-quasar": "^0.1.3",
+    "vue-context": "^6.0.0",
+    "vue-fragment": "^1.5.1"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^3.0.0",
     "@nuxtjs/eslint-module": "^2.0.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.2.0",
-    "eslint-plugin-nuxt": "^1.0.0"
+    "eslint-plugin-nuxt": "^1.0.0",
+    "js-cookie": "^2.2.1",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^10.0.1"
   }
 }

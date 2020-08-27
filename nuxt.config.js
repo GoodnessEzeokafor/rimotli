@@ -1,5 +1,11 @@
 
 export default {
+  vue: {
+    config: {
+      productionTip: false,
+      devtools: true
+    }
+  },
   /*
   ** Nuxt rendering mode
   ** See https://nuxtjs.org/api/configuration-mode
@@ -29,6 +35,11 @@ export default {
   },
 
   /*
+   ** Customize the progress-bar color
+   */
+  loading: '~/components/Preloader.vue',
+
+  /*
   ** Global CSS
   */
   css: [
@@ -39,6 +50,7 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
+    { src: '~plugins/vue-context.js', ssr: false }
   ],
 
   /*
@@ -46,13 +58,12 @@ export default {
   ** See https://nuxtjs.org/api/configuration-components
   */
   components: true,
-
   /*
   ** Nuxt.js dev-modules
   */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module',
+    '@nuxtjs/eslint-module'
   ],
 
   /*
