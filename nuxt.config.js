@@ -16,14 +16,7 @@ export default {
   ** Nuxt target
   ** See https://nuxtjs.org/api/configuration-target
   */
-  target: 'static',
-  /*
-   ** Headers of the page
-   ** See https://nuxtjs.org/api/configuration-head
-   */
-  generate: {
-    fallback: true,
-  },
+  target: 'server',
 
   /*
   ** Headers of the page
@@ -59,8 +52,7 @@ export default {
   plugins: [
     {
       src: '@/plugins/vue-context.js',
-      mode: 'client',
-      ssr: false
+      mode: 'client'
     }
   ],
 
@@ -96,7 +88,4 @@ export default {
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/
   */
-  build: {
-    transpile: ['@luxdamore/vue-cursor-fx', 'vue-context']
-  }
 }
