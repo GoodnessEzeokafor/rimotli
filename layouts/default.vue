@@ -1,96 +1,68 @@
 <template>
-  <section>
-    <header>
-      <nav>
-        <a href="#" data-cursor-hover><img src="~/assets/logo.png" alt=""></a>
-      </nav>
-      <Nuxt />
-    </header>
-    <transition name="appear" mode="in-out">
-      <ul
-        v-if="hideMenu"
-        ref="my_menu"
-        class="contextMenu"
-        :style="menuSettings"
-        @mouseenter="inMenu = true"
-        @mouseleave="inMenu = false"
-      >
-        <li><a href="#">Homepage</a></li>
-        <li><a href="#">Sitemap</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-    </transition>
-    <footer />
-    <cursor-fx color="#eeb30b" color-hover="#5f4801">
-      <hsc-menu-style-white>
-        <hsc-menu-context-menu style="margin: 50px;">
-          <div class="box" style="padding: 1em;">
-            Secondary click here
-          </div>
-          <template slot="contextmenu">
-            <hsc-menu-item label="MenuItem 1" />
-            <hsc-menu-item label="MenuItem 2" />
-            <hsc-menu-item label="MenuItem 2">
-              <hsc-menu-item label="MenuItem 4" />
-              <hsc-menu-item label="MenuItem 5" />
-            </hsc-menu-item>
-          </template>
-        </hsc-menu-context-menu>
-        <hsc-menu-context-menu style="margin: 50px;">
-          <div class="box" style="padding: 1em;">
-            outer click here(nested case)
-            <hsc-menu-context-menu style="margin: 50px;" @contextmenu.native.stop>
-              <div class="box" style="padding: 1em;">
-                inner click here
-              </div>
-              <template slot="contextmenu">
-                <hsc-menu-item label="MenuItem 6" />
-                <hsc-menu-item label="MenuItem 7" />
-                <hsc-menu-item label="MenuItem 8">
-                  <hsc-menu-item label="MenuItem 9" />
-                  <hsc-menu-item label="MenuItem 10" />
-                </hsc-menu-item>
-              </template>
-            </hsc-menu-context-menu>
-          </div>
-          <template slot="contextmenu">
-            <hsc-menu-item label="MenuItem 1" />
-            <hsc-menu-item label="MenuItem 2" />
-            <hsc-menu-item label="MenuItem 2">
-              <hsc-menu-item label="MenuItem 4" />
-              <hsc-menu-item label="MenuItem 5" />
-            </hsc-menu-item>
-          </template>
-        </hsc-menu-context-menu>
-        <hsc-menu-button-menu style="margin: 50px;" @open="open" @close="close">
-          <button>Click Here</button>
-          <template slot="contextmenu">
-            <hsc-menu-item label="MenuItem 1" />
-            <hsc-menu-item label="MenuItem 2" />
-            <hsc-menu-item label="MenuItem 2">
-              <hsc-menu-item label="MenuItem 4" />
-              <hsc-menu-item label="MenuItem 5" />
-            </hsc-menu-item>
-          </template>
-        </hsc-menu-button-menu>
-      </hsc-menu-style-white>
-      <p>Helo</p>
-    </cursor-fx>
-  </section>
+  <client-only>
+    <section @contextmenu.prevent="$refs.menu.open">
+      <header>
+        <nav>
+          <a href="#" data-cursor-hover><img src="~/assets/logo.png" alt=""></a>
+        </nav>
+        <Nuxt />
+      </header>
+      <div>
+        <vue-context ref="menu">
+          <li data-cursor-hover>
+            <a @click.prevent="onClick($event.target.innerText)">
+              Create Outfit
+            </a>
+          </li>
+          <li data-cursor-hover>
+            <a @click.prevent="onClick($event.target.innerText)">
+              Manage Outfit
+            </a>
+          </li>
+        </vue-context>
+      </div>
+      <footer>
+        <div class="footer__text">
+          <span>3811 Ditmars Blvd Astoria, NY 11105 United States</span>
+        </div>
+        <div data-cursor-hover class="footer__social">
+          <ul>
+            <li><a href="#"><img src="~/assets/dribbble.png" alt=""></a></li>
+            <li><a href="#"><img src="~/assets/facebook.png" alt=""></a></li>
+            <li><a href="#"><img src="~/assets/twitter.png" alt=""></a></li>
+            <li><a href="#"><img src="~/assets/behance.png" alt=""></a></li>
+          </ul>
+        </div>
+      </footer>
+      <cursor-fx color="#eeb30b" color-hover="#000">
+        <p class="cursor__text">
+          Right Click
+        </p>
+      </cursor-fx>
+    </section>
+  </client-only>
 </template>
 
 <style lang="scss">
  @import "assets/style";
+  .cursor__text {
+    position: absolute;
+    top: 50%;
+    left: 105%;
+    transform: translateY(-50%);
+    width: 150%;
+    font-size: 18px;
+    .cursor-fx--hover & {
+      display: none;
+    }
+  }
 </style>
 
 <script>
-import { CursorFx } from '@luxdamore/vue-cursor-fx'
 import '@luxdamore/vue-cursor-fx/dist/CursorFx.css'
+import 'vue-context/src/sass/vue-context.scss'
 
 export default {
-  components: {
-    CursorFx
-  },
   data () {
     return {
       top: '0',
@@ -109,7 +81,14 @@ export default {
           max: 1
         },
         opacity: 1
-      }
+      },
+      items: [
+        'Cras justo odio',
+        'Dapibus ac facilisis in',
+        'Morbi leo risus',
+        'Porta ac consectetur ac',
+        'Vestibulum at eros'
+      ]
     }
   },
   computed: {
@@ -143,19 +122,8 @@ export default {
     // });
   },
   methods: {
-    open () {
-      console.log('open')
-    },
-    close () {
-      console.log('close')
-    },
-    moveCursor (e) {
-      this.xChild = e.clientX
-      this.yChild = e.clientY
-      setTimeout(() => {
-        this.xParent = e.clientX - 15
-        this.yParent = e.clientY - 15
-      }, 150)
+    onClick (text) {
+      alert(`You clicked on: "${text}"`)
     }
   }
 }

@@ -20,7 +20,10 @@
 </template>
 <script>
 export default {
-  props: ['error']
+  props: {
+    // eslint-disable-next-line vue/require-default-prop
+    error: String
+  }
 }
 </script>
 

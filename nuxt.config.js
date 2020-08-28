@@ -50,7 +50,11 @@ export default {
   ** https://nuxtjs.org/guide/plugins
   */
   plugins: [
-    { src: '~plugins/vue-context.js', ssr: false }
+    {
+      src: '@/plugins/vue-context.js',
+      mode: 'client',
+      ssr: false
+    }
   ],
 
   /*
@@ -86,5 +90,6 @@ export default {
   ** See https://nuxtjs.org/api/configuration-build/
   */
   build: {
+    transpile: ['@luxdamore/vue-cursor-fx', 'vue-context']
   }
 }
